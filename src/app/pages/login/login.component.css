@@ -1,0 +1,30 @@
+/*
+ * Title: Sprint 1 - Nodebucket;
+ * Author: Professor Krasso
+ * Date: 3/20/2021
+ * Modified By: Jonathan Roland
+ * Description: This application provides a TODO list to users to track work or study items;
+*/
+
+/* This file acts as the style sheet for the login component */
+
+.login-container{
+  width: 30%;
+  margin: 0 auto;
+  margin-top: 10%;
+}
+
+.login-title{
+  text-align: center;
+  font-size: 48px;
+  font-weight: lighter;
+}
+
+.login-subtitle{
+  text-align: center;
+}
+
+.error-message{
+  color: red;
+  text-align: center;
+}

@@ -1,3 +1,11 @@
+/*============================================;
+Title: Sprint 1 - Nodebucket;
+Author: Professor Krasso;
+Date: 3/20/2021;
+Modified By: Jonathan Roland;
+Description: This application provides a TODO list to users to track work or study items.
+===========================================*/
+
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.

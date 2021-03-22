@@ -1,40 +1,49 @@
+/*
+ * Title: Sprint 1 - Nodebucket;
+ * Author: Professor Krasso
+ * Date: 3/20/2021
+ * Modified By: Jonathan Roland
+ * Description: This application provides a TODO list to users to track work or study items;
+*/
+
+/* This file acts as the style sheet for the base layout component */
+
 .logo {
     margin-left: 75px;
     font-size: 24px;
     font-weight: lighter;;
   }
-  
+
   .navbar-container {
     padding: 5px;
   }
-  
+
   .navbar-link {
     font-size: 24px;
     font-weight: lighter;
   }
-  
+
   .main-content {
     padding-left: 30px;
   }
-  
+
   .footer {
     bottom: 0;
     position: absolute;
     width: 100%;
   }
-  
+
   .footer-content {
     font-size: 16px;
     font-weight: lighter;
     padding-left: 100px;
     letter-spacing: 3px;
   }
-  
+
   .bu-link {
     text-decoration: none;
   }
-  
+
   .bu-link:hover {
     text-decoration: underline;
   }
-  

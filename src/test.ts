@@ -1,3 +1,11 @@
+/*============================================;
+Title: Sprint 1 - Nodebucket;
+Author: Professor Krasso;
+Date: 3/20/2021;
+Modified By: Jonathan Roland;
+Description: This application provides a TODO list to users to track work or study items.
+===========================================*/
+
 // This file is required by karma.conf.js and loads recursively all the .spec and framework files
 
 import 'zone.js/dist/zone-testing';
