@@ -138,7 +138,7 @@ router.get('/:empId/tasks', async(req,res) => {
 
   try
   {
-    Employee.findOne({'empId': req.params.empId}, function(err, employee){
+    Employee.findOne({'empId': req.params.empId}, 'empId todo done', function(err, employee){
       if(err)
       {
         //If the database encounters an error, log the error to console and output as an object.
@@ -309,7 +309,7 @@ router.delete('/:empId/tasks/:taskId', async(req,res) => {
                 //Otherwise log the updated employee and return it in the success response.
                 console.log(updatedDoneItemEmployee);
                 const deleteDoneItemSuccess = new BaseResponse('200','Query successful', updatedDoneItemEmployee);
-                res.status(200).send(updatedDoneItemEmployee.toObject());
+                res.status(200).send(deleteDoneItemSuccess.toObject());
               }
             })
           }
