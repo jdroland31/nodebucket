@@ -1,4 +1,12 @@
 <!--
+ * Title: Sprint 3 - Nodebucket;
+ * Author: Professor Krasso;
+ * Date: 4/5/2021;
+ * Modified By: Jonathan Roland;
+ * Description: This application provides a TODO list to users to track work or study items;
+-->
+
+<!--
  * Title: Sprint 1 - Nodebucket;
  * Author: Professor Krasso;
  * Date: 3/20/2021;
@@ -9,10 +17,137 @@
 <!-- This file defines the home display using Angular Material and fxLayout for layout -->
 
 <div fxLayout="column" class="main-welcome">
+
+  <!-- title div -->
+  <div fxFlex>
     <h1 class="title">
       Welcome to WEB 450's - nodebucket Project <br />
       <span class="subtitle">
-        Pay close attention to the requirements, double and triple check the files for code attribution, and do not wait unitl the last minute to begin working on each item.
+        Create a new task to track in the 'To Do' bucket, or drag your finished tasks to the 'Done' bucket.
       </span>
     </h1>
   </div>
+
+  <!-- create task div -->
+  <div fxFlex>
+    <div fxLayout="column" class="task-container">
+      <button mat-raised-button color="primary" (click)="openCreateTaskDialog()" class="task-create-button">Create Task</button>
+    </div>
+  </div>
+
+  <!-- task columns div -->
+  <div fxFlex>
+    <div fxLayout="row" fxLayoutGap="15px" class="task-container">
+
+      <!-- todo col -->
+      <div fxFlex>
+        <mat-card>
+          <mat-card-title>To Do</mat-card-title>
+          <hr>
+          <!-- <mat-card-subtitle></mat-card-subtitle> -->
+          <mat-card-content>
+            <div
+              fxLayout="column"
+              fxLayoutGap="10px"
+              class="task-list"
+              cdkDropList
+              #todoList="cdkDropList"
+              [cdkDropListData]="todo"
+              [cdkDropListConnectedTo]="[doneList]"
+              (cdkDropListDropped)="drop($event)">
+
+              <div *ngFor="let item of todo" cdkDrag>
+                <mat-card class="mat-elevation-z0 task-card">
+                  <!-- Here we pull in the color of the task to display for the user's visual reference. -->
+                  <mat-card-title style="width: 100%; height: 2px;" [ngStyle]="{'background-color': item.color}"></mat-card-title>
+                  <mat-card-content>
+                    <div fxLayout="row">
+                      <!-- task name -->
+                      <div fxFlex>
+                        <b>{{ item.name }}</b>
+                        <p *ngIf="item.dueDate">Due: {{ item.dueDate}}</p>
+                        <p *ngIf="item.points">Points: {{ item.points}}</p>
+                      </div>
+                      <!-- additional fields go here -->
+                      <!-- menu -->
+                      <div fxFlex fxLayoutAlign="end">
+                        <!-- task menu icon -->
+                        <button [matMenuTriggerFor]="todoOptions" class="" mat-icon-button>
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #todoOptions="matMenu" x-position="before">
+                          <!-- delete task -->
+                          <button (click)="deleteTask(item._id)" mat-menu-item>
+                            Remove
+                          </button>
+                        </mat-menu>
+                      </div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- doing col -->
+      <!-- <div fxFlex>
+        <mat-card>
+          <mat-card-title></mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
+          <mat-card-content></mat-card-content>
+        </mat-card>
+      </div> -->
+
+      <!-- done col -->
+      <div fxFlex>
+        <mat-card>
+          <mat-card-title>Done</mat-card-title>
+          <hr>
+          <!-- <mat-card-subtitle></mat-card-subtitle> -->
+          <mat-card-content>
+            <div
+            fxLayout="column"
+            fxLayoutGap="10px"
+            class="task-list"
+            cdkDropList
+            #doneList="cdkDropList"
+            [cdkDropListData]="done"
+            [cdkDropListConnectedTo]="[todoList]"
+            (cdkDropListDropped)="drop($event)">
+              <div *ngFor="let item of done" cdkDrag>
+                <mat-card class="mat-elevation-z0">
+                  <mat-card-title style="width: 100%; height: 2px;" [ngStyle]="{'background-color': item.color}"></mat-card-title>
+                  <mat-card-content>
+                    <div fxLayout="row">
+                      <div fxFlex>
+                        <b>{{ item.name }}</b>
+                        <p *ngIf="item.dueDate">Due: {{ item.dueDate}}</p>
+                        <p *ngIf="item.points">Points: {{ item.points}}</p>
+                      </div>
+                      <div fxFlex fxLayoutAlign="end">
+                        <button [matMenuTriggerFor]="doneOptions" mat-icon-button>
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #doneOptions="matMenu" x-position="before">
+                          <button (click)="deleteTask(item._id)" mat-menu-item>
+                            Remove
+                          </button>
+                        </mat-menu>
+                      </div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <!-- end of fxLayout -->
+  </div>
+  <!-- end of task columns div -->
+</div>
+<!-- end of main container -->

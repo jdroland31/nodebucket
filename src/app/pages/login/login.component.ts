@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
       }
     })
   }
+
 //This function simply sets the standards used by the snackbar when called.
   openSnackBar(message: string, notificationType: string) : void
   {

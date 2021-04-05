@@ -1,0 +1,22 @@
+/*
+ * Title: Sprint 3 - Nodebucket;
+ * Author: Professor Krasso
+ * Date: 4/5/2021
+ * Modified By: Jonathan Roland
+ * Description: This application provides a TODO list to users to track work or study items;
+*/
+
+p{
+  width: 100%;
+  padding: 5px;
+}
+
+.container{
+  margin: 0 auto;
+  width: 75%;
+  padding: 5px;
+}
+
+.about-text-div{
+  padding-bottom: 100px;
+}

@@ -1,0 +1,20 @@
+mat-card{
+  width: 100%;
+}
+
+mat-card-content{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+h2{
+  text-align: center;
+}
+
+.contact-1{
+  margin-right: 200px;
+}
+
+.contact-2{
+  margin-left: 200px;
+}

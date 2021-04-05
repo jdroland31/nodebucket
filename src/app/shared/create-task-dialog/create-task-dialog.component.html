@@ -1,0 +1,51 @@
+<!--
+ * Title: Sprint 3 - Nodebucket;
+ * Author: Professor Krasso;
+ * Date: 4/5/2021;
+ * Modified By: Jonathan Roland;
+ * Description: This application provides a TODO list to users to track work or study items;
+-->
+
+<h2 mat-dialog-title>Add New Task</h2>
+
+<mat-dialog-content [formGroup]="taskForm">
+  <p>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input type="text" matInput placeholder="Enter a task name" formControlName="name" (keydown.enter)="createTask()">
+    </mat-form-field>
+  </p>
+  <!-- <p>
+    <mat-form-field>
+      <mat-label>Select Due Date (optional)</mat-label>
+      <input matInput matDatePicker="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </p> -->
+  <p>
+    <mat-form-field>
+      <mat-label>Color Code (optional)</mat-label>
+      <mat-select formControlName="color">
+        <mat-option value=""> None</mat-option>
+        <mat-option value="#32a852" style="background-color: #32a852;"> Green</mat-option>
+        <mat-option value="#ede911" style="background-color: #ede911;"> Yellow</mat-option>
+        <mat-option value="#3269a8" style="background-color: #3269a8;"> Blue</mat-option>
+        <mat-option value="#b12d2d" style="background-color: #b12d2d;"> Red</mat-option>
+        <mat-option value="#a432a8" style="background-color: #a432a8;"> Purple</mat-option>
+        <mat-option value="#d69112" style="background-color: #d69112;"> Orange</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>Points (optional)</mat-label>
+      <input type="number" min="0" matInput placeholder="Enter a task name" formControlName="points">
+    </mat-form-field>
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="cancel()" [disabled]="!taskForm.valid">Create Task</button>
+</mat-dialog-actions>
