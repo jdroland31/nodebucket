@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string;
 
   ngOnInit(): void {
-
+    //The login form only has one field which requires a numerical input to be valid.
     this.loginForm = this.fb.group({
       empId: [null, Validators.compose([Validators.required,Validators.pattern('^[0-9]*$')])]
     });

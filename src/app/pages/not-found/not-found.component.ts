@@ -6,6 +6,8 @@ Modified By: Jonathan Roland;
 Description: This application provides a TODO list to users to track work or study items.
 ===========================================*/
 
+// This component provides a custom 404 page to the user.
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({

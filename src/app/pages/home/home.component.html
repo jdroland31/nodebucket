@@ -44,7 +44,7 @@
         <mat-card>
           <mat-card-title>To Do</mat-card-title>
           <hr>
-          <!-- <mat-card-subtitle></mat-card-subtitle> -->
+          <!-- Each task is unfolded as a card within a drag and drop menu column. -->
           <mat-card-content>
             <div
               fxLayout="column"
@@ -65,10 +65,11 @@
                       <!-- task name -->
                       <div fxFlex>
                         <b>{{ item.name }}</b>
+                        <!-- additional fields go here -->
                         <p *ngIf="item.dueDate">Due: {{ item.dueDate}}</p>
                         <p *ngIf="item.points">Points: {{ item.points}}</p>
                       </div>
-                      <!-- additional fields go here -->
+
                       <!-- menu -->
                       <div fxFlex fxLayoutAlign="end">
                         <!-- task menu icon -->
@@ -102,11 +103,11 @@
       </div> -->
 
       <!-- done col -->
+      <!-- The done column reflects the to do column's task card structure. -->
       <div fxFlex>
         <mat-card>
           <mat-card-title>Done</mat-card-title>
           <hr>
-          <!-- <mat-card-subtitle></mat-card-subtitle> -->
           <mat-card-content>
             <div
             fxLayout="column"
@@ -124,14 +125,17 @@
                     <div fxLayout="row">
                       <div fxFlex>
                         <b>{{ item.name }}</b>
+                        <!-- dueDate and points are optional fields so they are only displayed if the data is present in each task. -->
                         <p *ngIf="item.dueDate">Due: {{ item.dueDate}}</p>
                         <p *ngIf="item.points">Points: {{ item.points}}</p>
                       </div>
+                      <!-- A task options menu for the user. It currently only supports the remove button but could support editing as well if implemented.  -->
                       <div fxFlex fxLayoutAlign="end">
                         <button [matMenuTriggerFor]="doneOptions" mat-icon-button>
                           <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #doneOptions="matMenu" x-position="before">
+                          <!-- The remove button allows old or unwanted items to be deleted. -->
                           <button (click)="deleteTask(item._id)" mat-menu-item>
                             Remove
                           </button>

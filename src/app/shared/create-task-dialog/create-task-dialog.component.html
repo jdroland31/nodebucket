@@ -11,6 +11,7 @@
 <mat-dialog-content [formGroup]="taskForm">
   <p>
     <mat-form-field>
+      <!-- This required field allows the user to create the name of the task. -->
       <mat-label>Name</mat-label>
       <input type="text" matInput placeholder="Enter a task name" formControlName="name" (keydown.enter)="createTask()">
     </mat-form-field>
@@ -26,8 +27,9 @@
   <p>
     <mat-form-field>
       <mat-label>Color Code (optional)</mat-label>
+      <!-- This optional field allows the user to color code a task. -->
       <mat-select formControlName="color">
-        <mat-option value=""> None</mat-option>
+        <mat-option value="">None</mat-option>
         <mat-option value="#32a852" style="background-color: #32a852;"> Green</mat-option>
         <mat-option value="#ede911" style="background-color: #ede911;"> Yellow</mat-option>
         <mat-option value="#3269a8" style="background-color: #3269a8;"> Blue</mat-option>
@@ -39,6 +41,7 @@
   </p>
   <p>
     <mat-form-field>
+      <!-- This optional field allows the user to set arbitrary points on a task. -->
       <mat-label>Points (optional)</mat-label>
       <input type="number" min="0" matInput placeholder="Enter a task name" formControlName="points">
     </mat-form-field>
@@ -47,5 +50,5 @@
 
 <mat-dialog-actions align="end">
   <button mat-button (click)="cancel()">Cancel</button>
-  <button mat-button (click)="cancel()" [disabled]="!taskForm.valid">Create Task</button>
+  <button mat-button (click)="createTask()" [disabled]="!taskForm.valid">Create Task</button>
 </mat-dialog-actions>

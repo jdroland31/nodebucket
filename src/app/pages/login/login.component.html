@@ -27,6 +27,7 @@
         </ng-container>
         <form [formGroup]="loginForm" (ngSubmit)="login(); loginForm.reset()" >
           <mat-card-content>
+            <!-- If the user fails to input an id or inputs a non-numeric id the appropriate error message is displayed. -->
             <input matInput [formControl]="loginForm.controls['empId']" placeholder="Employee ID">
             <mat-error *ngIf="loginForm.controls['empId'].hasError('required') && loginForm.controls['empId'].touched">
               Employee ID is a required field.

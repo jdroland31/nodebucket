@@ -6,7 +6,7 @@ Modified By: Jonathan Roland;
 Description: This application provides a TODO list to users to track work or study items.
 ===========================================*/
 
-//This file provides the auth layout component
+//This file provides the auth layout component for the application.
 
 import { Component, OnInit } from '@angular/core';
 

@@ -6,6 +6,8 @@ Modified By: Jonathan Roland;
 Description: This application provides a TODO list to users to track work or study items.
 ===========================================*/
 
+//This file acts as the specification for the not found component.
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotFoundComponent } from './not-found.component';
