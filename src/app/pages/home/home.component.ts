@@ -25,6 +25,7 @@ import { CdkDragDrop,moveItemInArray, transferArrayItem } from '@angular/cdk/dra
 export class HomeComponent implements OnInit {
 
   todo: Item[];
+  doing: Item[];
   done: Item[];
   employee: Employee;
   empId: string;
@@ -43,9 +44,11 @@ export class HomeComponent implements OnInit {
     }, () => {
       // on complete
       this.todo = this.employee.todo;
+      this.doing = this.employee.doing;
       this.done = this.employee.done;
       console.log('This is in the complete section');
       console.log(this.todo);
+      console.log(this.doing);
       console.log(this.done);
     }
     )
@@ -71,6 +74,7 @@ export class HomeComponent implements OnInit {
           console.log(err);
         }, () => {
           this.todo = this.employee.todo;
+          this.doing = this.employee.doing;
           this.done = this.employee.done;
           console.log('A new task was created.');
         })
@@ -79,17 +83,20 @@ export class HomeComponent implements OnInit {
   }
 //This function utilizes a drag/drop event to move task data between the doing and done columns for the user.
   drop(event: CdkDragDrop<any[]>){
+    // console.log(event);
     //If the container being dropped to is the same as the container picked up from, the item is reordered in that task column.
     if(event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);//This is a CDKDragDrop function to reorder items in a drag/drop list.
       console.log("Reordered item in existing column/array");
-      this.updateTaskList(this.empId, this.todo, this.done);//The updateTaskList() function is called to synchronize user's data with the backend.
+      this.updateTaskList(this.empId, this.todo, this.doing, this.done);//The updateTaskList() function is called to synchronize user's data with the backend.
     }
     //If the column being dropped to is a different column, the user's task lists (to do and done) are updated according to the new arrangement.
     else{
+      // console.log(event.previousContainer);
+      // console.log(event.container);
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);//This is a CDKDragDrop function to move items between drag/drop lists.
       console.log("Moved task item to a different column/array");
-      this.updateTaskList(this.empId, this.todo, this.done);//The updateTaskList() function is called to synchronize user's data with the backend.
+      this.updateTaskList(this.empId, this.todo, this.doing, this.done);//The updateTaskList() function is called to synchronize user's data with the backend.
     }
   }
 //This function is used to delete old tasks that no longer need to be tracked.
@@ -101,6 +108,7 @@ export class HomeComponent implements OnInit {
         console.log(err);
       }, () => {
         this.todo = this.employee.todo;
+        this.doing = this.employee.doing;
         this.done = this.employee.done;
         console.log(`Task item ${taskId} was deleted`);
       })
@@ -111,13 +119,14 @@ export class HomeComponent implements OnInit {
 // Private functions
 
 //This function takes in an employee id and their todo and done item arrays and calls the task service to update them.
-  private updateTaskList(empId: string, todo: Item[], done: Item[]): void {
-    this.taskService.updateTask(empId,todo,done).subscribe(res => {
+  private updateTaskList(empId: string, todo: Item[], doing: Item[], done: Item[]): void {
+    this.taskService.updateTask(empId,todo,doing,done).subscribe(res => {
       this.employee = res.data;
     }, err => {
       console.log(err);
     }, () => {
       this.todo = this.employee.todo;
+      this.doing = this.employee.doing;
       this.done = this.employee.done;
       console.log(`User ${empId}'s task lists were updated`);
     })

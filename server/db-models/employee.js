@@ -14,6 +14,7 @@ const Item = require('./item');
 let employeeSchema = mongoose.Schema({
   empId: { type: String, unique: true },
   todo: [Item],
+  doing: [Item],
   done: [Item]
 }, {collection: "employees"})
 

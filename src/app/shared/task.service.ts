@@ -47,12 +47,14 @@ export class TaskService {
    *
    * @param empId
    * @param todo
+   * @param doing
    * @param done
    * @returns
    */
-  updateTask(empId: string, todo: Item[], done: Item[]): Observable<any> {
+  updateTask(empId: string, todo: Item[], doing: Item[], done: Item[]): Observable<any> {
     return this.http.put('/api/employees/'+empId+'/tasks',{
       todo,
+      doing,
       done
     })
   }

@@ -9,7 +9,7 @@
 //This file provides the logic for interacting with the findEmployeeById API.
 
 const express = require('express');
-const employee = require('../db-models/employee');
+// const employee = require('../db-models/employee');
 const Employee = require("../db-models/employee");
 const BaseResponse = require('../service/base-response');
 
@@ -131,14 +131,14 @@ router.post('/:empId/tasks',async(req,res) => {
  * API: findAllTasks
  * @param empId
  * @returns Employee document or null
- * This routes returns an employee document (which contains all tasks under the employee's todo and done arrays).
+ * This routes returns an employee document (which contains all tasks under the employee's todo, doing and done arrays).
 */
 
 router.get('/:empId/tasks', async(req,res) => {
 
   try
   {
-    Employee.findOne({'empId': req.params.empId}, 'empId todo done', function(err, employee){
+    Employee.findOne({'empId': req.params.empId}, 'empId todo doing done', function(err, employee){
       if(err)
       {
         //If the database encounters an error, log the error to console and output as an object.
@@ -201,6 +201,7 @@ router.put('/:empId/tasks', async(req,res) => {
           //Set the employee's todo and done arrays to match those in the request body.
           employee.set({
             todo: req.body.todo,
+            doing: req.body.doing,
             done: req.body.done
           });
           //Save the new task data.
@@ -267,6 +268,7 @@ router.delete('/:empId/tasks/:taskId', async(req,res) => {
           //If the empId is valid, log the employee document and copy the todo and done arrays to constants.
           console.log(employee);
           const todoItem = employee.todo.find(item => item._id.toString() === req.params.taskId);
+          const doingItem = employee.doing.find(item => item._id.toString() === req.params.taskId);
           const doneItem = employee.done.find(item => item._id.toString() === req.params.taskId);
           //If the item to remove (identified by the _id property) is in the todo array, attempt to delete it.
           if(todoItem)
@@ -288,6 +290,28 @@ router.delete('/:empId/tasks/:taskId', async(req,res) => {
                 console.log(updatedTodoItemEmployee);
                 const deleteTodoItemSuccess = new BaseResponse('200', 'Query successful', updatedTodoItemEmployee);
                 res.status(200).send(deleteTodoItemSuccess.toObject());
+              }
+            })
+          }
+          //If the item to remove (identified by the _id property) is in the doing array, attempt to delete it.
+          else if (doingItem)
+          {
+            console.log(doingItem);
+            employee.doing.id(doingItem._id).remove();
+            //Attempt to save the updated employee.
+            employee.save(function(err, updatedDoingItemEmployee) {
+              if(err)
+              {
+                //If an error is encountered, log the error and return it as an object to the user.
+                console.log(err);
+                const deleteDoingItemMongoDbError = new BaseResponse('500',`Internal Server Error ${err.message}`,null);
+                res.status(500).send(deleteDoingItemMongoDbError.toObject());
+              }
+              else{
+                //Otherwise log the updated employee and return it in the success response.
+                console.log(updatedDoingItemEmployee);
+                const deleteDoingItemSuccess = new BaseResponse('200','Query successful', updatedDoingItemEmployee);
+                res.status(200).send(deleteDoingItemSuccess.toObject());
               }
             })
           }
